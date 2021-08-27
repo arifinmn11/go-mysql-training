@@ -15,11 +15,4 @@ func main() {
 		fmt.Println(err.Error())
 	}
 	defer db.Close()
-
-	// run query
-	err = selectOneQuery(db, 1)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
 }
