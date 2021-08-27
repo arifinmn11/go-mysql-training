@@ -21,12 +21,12 @@ func selectQuery(db *sql.DB) error {
 	if err != nil {
 		return err
 	}
-	defer rows.Close()
 
 	// parse query result to customer struct
 	var result []customer
 
 	// call Next to get each row
+	defer rows.Close()
 	for rows.Next() {
 		var each = customer{}
 
