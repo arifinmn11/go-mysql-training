@@ -7,7 +7,7 @@ import (
 
 func insertQuery(db *sql.DB) error {
 	// run query
-	_, err := db.Exec("INSERT INTO Customers (FirstName, LastName, Phone, City) VALUES (?, ?, ?, ?)", "Lord", "Voldemort", "929-278-0564", "Hogwarts")
+	_, err := db.Exec("INSERT INTO Customers (FirstName, LastName, Phone, City, Birthday) VALUES (?, ?, ?, ?, ?)", "Lord", "Voldemort", "929-278-0564", "Hogwarts", "1887-09-10")
 	if err != nil {
 		return err
 	}
@@ -25,12 +25,17 @@ func selectQuery(db *sql.DB) error {
 
 	// parse query result to customer struct
 	var result []customer
+
+	// call Next to get each row
 	for rows.Next() {
 		var each = customer{}
+
+		// map each column to customer's attribute
 		var err = rows.Scan(&each.id, &each.firstName, &each.lastName, &each.phone, &each.city, &each.birthday)
 		if err != nil {
 			return err
 		}
+
 		result = append(result, each)
 	}
 
